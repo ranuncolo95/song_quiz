@@ -57,6 +57,17 @@ A robust API service that retrieves song lyrics by artist and title. Built with 
 
    ```bash
     poetry run uvicorn main:app --reload
+##API Endpoints 📡
+###Get Lyrics
+
+text
+
+Get Lyrics
+   ```bash
+      curl "http://localhost:8000/lyric?artist=Coldplay&song=Yellow"
+```
+
+Successful Response:
 
 
 
