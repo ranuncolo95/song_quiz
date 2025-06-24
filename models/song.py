@@ -11,7 +11,7 @@ class Song():
     lyrics = erase_before_bracket(lyrics)
     lyrics = remove_text_inside_brackets(lyrics)
     lyrics = adjust_lowercase_starts(lyrics)
-    lyrics = extract_parenthetical_blocks(lyrics)
+    #lyrics = extract_parenthetical_blocks(lyrics)
     lyrics = merge_comma_lines(lyrics)
 
     self.lyrics = lyrics

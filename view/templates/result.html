@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Lyrics Results | Song Quiz</title>
+    <style>
+        :root {
+            --primary: #4a148c;
+            --secondary: #7b1fa2;
+            --accent: #e91e63;
+            --light: #f5f5f5;
+            --dark: #212121;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+        
+        .results-container {
+            padding: 3rem 0;
+        }
+        
+        .search-info {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .search-info h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .search-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .lyrics-container {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .lyrics-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+        
+        .lyrics-title {
+            color: var(--primary);
+        }
+        
+        .lyrics-text {
+            white-space: pre-line;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .lyrics-section {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .lyrics-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .search-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <h1>Song Quiz</h1>
+            <div>
+                <a href="index.html" class="btn btn-outline">Back to Home</a>
+                <a href="https://github.com/ranuncolo95/song_quiz" class="btn">View on GitHub</a>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container results-container">
+        <div class="search-info">
+            <h2>Lyrics for: <span name="song-title">{{song}}</span></h2>
+            <p>Artist: <span name="artist-name">{{artist}}</span></p>
+        </div>
+        
+        <div class="lyrics-container">            
+            <div class="lyrics-section">
+                <p class="lyrics-text" id="lyrics-text">
+                    {{lyric}}
+                </p>
+            </div>
+            
+            <div class="actions">
+                <a href="index.html" class="btn">Search Another Song</a>
+                <a href="#" class="btn btn-secondary">View Similar Songs</a>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>Song Quiz Project &copy; 2023 | Created by ranuncolo95</p>
+            <p><a href="https://github.com/ranuncolo95/song_quiz" style="color: var(--accent);">Contribute on GitHub</a></p>
+        </div>
+    </footer>
+</body>
+</html>

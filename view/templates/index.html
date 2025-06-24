@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,46 +13,46 @@
             --light: #f5f5f5;
             --dark: #212121;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background-color: var(--light);
             color: var(--dark);
             line-height: 1.6;
         }
-        
+
         header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             padding: 2rem 0;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
         }
-        
+
         h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
         }
-        
+
         .tagline {
             font-size: 1.2rem;
             opacity: 0.9;
             max-width: 700px;
             margin: 0 auto;
         }
-        
+
         .btn {
             display: inline-block;
             background-color: var(--accent);
@@ -65,60 +66,60 @@
             border: none;
             cursor: pointer;
         }
-        
+
         .btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 20px rgba(233, 30, 99, 0.3);
         }
-        
+
         .btn-secondary {
             background-color: var(--secondary);
         }
-        
+
         section {
             padding: 4rem 0;
         }
-        
+
         .section-title {
             text-align: center;
             margin-bottom: 3rem;
             color: var(--primary);
         }
-        
+
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-        
+
         .feature-card {
             background: white;
             border-radius: 8px;
             padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease;
         }
-        
+
         .feature-card:hover {
             transform: translateY(-10px);
         }
-        
+
         .feature-card h3 {
             color: var(--secondary);
             margin-bottom: 1rem;
         }
-        
+
         .github-section {
             background-color: white;
         }
-        
+
         .repo-links {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 1rem;
         }
-        
+
         .repo-link {
             background: var(--light);
             padding: 1rem 1.5rem;
@@ -128,12 +129,12 @@
             transition: all 0.3s ease;
             border: 1px solid #eee;
         }
-        
+
         .repo-link:hover {
             background: var(--primary);
             color: white;
         }
-        
+
         footer {
             background-color: var(--dark);
             color: white;
@@ -141,32 +142,32 @@
             padding: 2rem 0;
             margin-top: 2rem;
         }
-        
+
         /* New Demo Section Styles */
         .demo-section {
             background-color: white;
         }
-        
+
         .demo-form {
             max-width: 600px;
             margin: 0 auto;
             background: var(--light);
             padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
-        
+
         .form-group {
             margin-bottom: 1.5rem;
         }
-        
+
         label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: bold;
             color: var(--primary);
         }
-        
+
         input[type="text"] {
             width: 100%;
             padding: 0.8rem;
@@ -174,7 +175,7 @@
             border-radius: 4px;
             font-size: 1rem;
         }
-        
+
         .results {
             margin-top: 2rem;
             padding: 1rem;
@@ -183,85 +184,93 @@
             border-left: 4px solid var(--accent);
             display: none;
         }
-        
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
             }
-            
+
             .features {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="container">
             <h1>Song Quiz</h1>
-            <p class="tagline">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, quis. Qui optio vel odit quo ex. Eaque sequi tempore unde.</p>
+            <p class="tagline">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, quis. Qui optio vel
+                odit quo ex. Eaque sequi tempore unde.</p>
             <a href="https://github.com/ranuncolo95/song_quiz" class="btn">View on GitHub</a>
         </div>
     </header>
-    
-    
+
+
     <!-- New Demo Section -->
     <section class="demo-section">
         <div class="container">
-            <h2 class="section-title">Try It Out</h2>
-            <div class="demo-form">
-                <div class="form-group">
-                    <label for="artist">Artist Name</label>
-                    <input type="text" id="artist" placeholder="e.g., The Black Keys">
+            <form action="/result" method="post">
+                <h2 class="section-title">Try It Out</h2>
+                <div class="demo-form">
+                    <div class="form-group">
+                        <label for="artist">Artist Name</label>
+                        <input type="text" id="artist" name="artist" placeholder="e.g., The Black Keys">
+                    </div>
+                    <div class="form-group">
+                        <label for="song">Song Title</label>
+                        <input type="text" id="song" name= "song" placeholder="e.g., Little Black Submarines">
+                    </div>
+                    <button id="submit-btn" class="btn btn-secondary">Get Lyric</button>
+
+                    <div id="results" class="results">
+                        <h3>Results</h3>
+                        <div id="result-content"></div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="song">Song Title</label>
-                    <input type="text" id="song" placeholder="e.g., Little Black Submarine">
-                </div>
-                <button id="submit-btn" class="btn btn-secondary">Get Lyric</button>
-                
-                <div id="results" class="results">
-                    <h3>Results</h3>
-                    <div id="result-content"></div>
-                </div>
-            </div>
+            </form>
         </div>
     </section>
-    
+
     <section>
         <div class="container">
             <h2 class="section-title">Features</h2>
             <div class="features">
                 <div class="feature-card">
                     <h3>Lorem, ipsum dolor.</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quibusdam magni repudiandae esse vero consequatur.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quibusdam magni repudiandae esse
+                        vero consequatur.</p>
                 </div>
                 <div class="feature-card">
                     <h3>Lorem, ipsum dolor.</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ipsum fugit soluta eos vero numquam?.</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ipsum fugit soluta eos vero
+                        numquam?.</p>
                 </div>
                 <div class="feature-card">
                     <h3>Lorem, ipsum dolor.</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate expedita iste, nesciunt esse fuga ducimus.</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate expedita iste, nesciunt esse
+                        fuga ducimus.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    
+
     <section class="github-section">
         <div class="container">
             <h2 class="section-title">Project Structure</h2>
             <div class="repo-links">
                 <a href="https://github.com/ranuncolo95/song_quiz" class="repo-link">Main Repository</a>
                 <a href="https://github.com/ranuncolo95/song_quiz/tree/main/web" class="repo-link">Web Interface</a>
-                <a href="https://github.com/ranuncolo95/song_quiz/tree/main/service" class="repo-link">Backend Service</a>
+                <a href="https://github.com/ranuncolo95/song_quiz/tree/main/service" class="repo-link">Backend
+                    Service</a>
                 <a href="https://github.com/ranuncolo95/song_quiz/tree/main/models" class="repo-link">Data Models</a>
                 <a href="https://github.com/ranuncolo95/song_quiz/tree/main/data" class="repo-link">Sample Data</a>
             </div>
         </div>
     </section>
-    
+
     <section>
         <div class="container">
             <h2 class="section-title">How It Works</h2>
@@ -281,64 +290,14 @@
             </div>
         </div>
     </section>
-    
+
     <footer>
         <div class="container">
             <p>Song Quiz Project &copy; 2023 | Created by ranuncolo95</p>
-            <p><a href="https://github.com/ranuncolo95/song_quiz" style="color: var(--accent);">Contribute on GitHub</a></p>
+            <p><a href="https://github.com/ranuncolo95/song_quiz" style="color: var(--accent);">Contribute on GitHub</a>
+            </p>
         </div>
     </footer>
-
-    <script>
-        document.getElementById('submit-btn').addEventListener('click', function() {
-            const artist = document.getElementById('artist').value.trim();
-            const song = document.getElementById('song').value.trim();
-            const resultsDiv = document.getElementById('results');
-            const resultContent = document.getElementById('result-content');
-            
-            if (!artist || !song) {
-                resultContent.innerHTML = '<p>Please enter both artist and song name.</p>';
-                resultsDiv.style.display = 'block';
-                return;
-            }
-            
-            // Simulate API call (in a real implementation, this would call your backend)
-            resultContent.innerHTML = `
-                <p><strong>Searching for:</strong> "${song}" by ${artist}</p>
-                <p>Loading song information...</p>
-            `;
-            resultsDiv.style.display = 'block';
-            
-            // This is where you would make an actual fetch request to your backend
-            // For now, we'll simulate a response after a short delay
-            setTimeout(() => {
-                // Simulated response - replace with actual API call
-                const simulatedResponse = {
-                    success: true,
-                    artist: artist,
-                    song: song,
-                    lyrics: "Simulated lyrics would appear here. In a real implementation, this would call your backend service to fetch actual song information.",
-                    matchConfidence: "85%"
-                };
-                
-                if (simulatedResponse.success) {
-                    resultContent.innerHTML = `
-                        <p><strong>Found:</strong> "${simulatedResponse.song}" by ${simulatedResponse.artist}</p>
-                        <p><strong>Match Confidence:</strong> ${simulatedResponse.matchConfidence}</p>
-                        <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 4px;">
-                            <p><strong>Sample Lyrics:</strong></p>
-                            <p>${simulatedResponse.lyrics}</p>
-                        </div>
-                        <p style="margin-top: 1rem; font-style: italic;">Note: This is a simulation. Connect to the actual backend to get real data.</p>
-                    `;
-                } else {
-                    resultContent.innerHTML = `
-                        <p>No results found for "${song}" by ${artist}.</p>
-                        <p>Please check your spelling or try a different song.</p>
-                    `;
-                }
-            }, 1500);
-        });
-    </script>
 </body>
+
 </html>
