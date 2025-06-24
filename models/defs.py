@@ -88,31 +88,19 @@ def erase_before_bracket(text):
         str: Text with everything before first '[' removed, or original text if '[' not found
     """
     bracket_index = text.find('[')
-    return text[bracket_index:]
+    return text[bracket_index:] if bracket_index != -1 else text
 
 
-def remove_text_inside_brackets(text, bracket_type='[]'):
+def remove_text_inside_brackets(text):
     """
     Removes text inside brackets, including cases where brackets are on separate lines.
-    
-    Args:
-        text (str): Input text to process
-        bracket_type (str): Type of brackets to remove ('[]', '()', '{}', '<>')
-        
+
     Returns:
         str: Text with bracket content removed, including multiline cases
     """
-    bracket_pairs = {
-        '[]': (r'\[', r'\]'),
-        '()': (r'\(', r'\)'),
-        '{}': (r'\{', r'\}'),
-        '<>': (r'\<', r'\>')
-    }
+    bracket_pairs = { '[]': (r'\[', r'\]')}
     
-    if bracket_type not in bracket_pairs:
-        raise ValueError("Invalid bracket type. Choose from: [], (), {}, <>")
-    
-    open_b, close_b = bracket_pairs[bracket_type]
+    open_b, close_b = bracket_pairs["[]"]
     # Pattern matches brackets with any content (including newlines) between them
     pattern = f'{open_b}[\\s\\S]*?{close_b}'
     return re.sub(pattern, '', text)
@@ -152,7 +140,8 @@ def adjust_lowercase_starts(text):
 def extract_parenthetical_blocks(text):
     """
     Processes text to extract parenthetical content spanning multiple lines,
-    and moves each complete block to the line above where it started.
+    and moves each complete block to the line above where it started,
+    while preserving original spacing between lines.
     
     Args:
         text (str): Input text with possible multi-line parentheses
@@ -198,13 +187,16 @@ def extract_parenthetical_blocks(text):
                         break
             
             if found_close:
-                # Reconstruct the lines
+                # Reconstruct the parenthetical block
                 parenthetical = '(' + ''.join(content) + ')'
                 
-                # Remove the parenthetical from original lines
+                # Preserve the original line before parenthetical
                 lines[content_start_line] = lines[content_start_line][:open_idx].rstrip()
+                
+                # Clear only the parenthetical content from subsequent lines (preserve empty lines)
                 for k in range(content_start_line + 1, i + 1):
-                    lines[k] = ''
+                    if lines[k].strip() == current.strip():  # Only clear if this line was part of the parenthetical
+                        lines[k] = '' if not lines[k].strip() else lines[k]  # Preserve empty lines
                 
                 # Insert the parenthetical on the line above
                 if content_start_line > 0:
@@ -217,12 +209,13 @@ def extract_parenthetical_blocks(text):
         else:
             i += 1
     
-    # Rebuild the text while removing empty lines
+    # Rebuild the text while preserving original empty lines
     result = []
     for line in lines:
-        stripped = line.strip()
-        if stripped:
-            result.append(stripped)
+        if line.strip():  # If line has content
+            result.append(line.rstrip())
+        else:  # Preserve empty lines
+            result.append('')
     
     return '\n'.join(result)
 
