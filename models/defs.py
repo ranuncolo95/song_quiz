@@ -35,46 +35,60 @@ def create_genius_url(artist: str, song: str) -> str:
 
 
 def scrape_genius_lyrics(url):
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-            "Accept": "application/json",
-            "Accept-Language": "en-US,en;q=0.9",
-            "Referer": "https://genius.com/"
-        }
-        
-        try:
-            response = requests.get(url, headers=headers, timeout=10)
-            response.raise_for_status()
-            
-            soup = BeautifulSoup(response.text, 'html.parser')
-            
-            # STRICT selection - only the lyrics containers
-            lyrics_containers = soup.select('div[data-lyrics-container="true"]')
-            
-            if not lyrics_containers:
-                return "Error: No lyrics containers found"
-            
-            clean_lyrics = []
-            for container in lyrics_containers:
-                # Remove ALL non-lyric elements including spans, buttons, etc.
-                for element in container.find_all(['button', 'svg',]):
-                    element.decompose()
-                
-                # Get text while preserving line breaks
-                container_text = container.get_text('\n', strip=True)
-                
-                # Only keep lines that look like actual lyrics
-                for line in container_text.split('\n'):
-                    if line and not any(x in line for x in ['Contributors', 'Lyrics', 'Read More']):
-                        clean_lyrics.append(line)
-            
-            lyrics = '\n'.join(clean_lyrics)
-            lyrics = re.sub(r'\n{3,}', '\n\n', lyrics.strip())
-            
-            return lyrics
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Connection": "keep-alive",
+        "Upgrade-Insecure-Requests": "1",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none",
+        "Sec-Fetch-User": "?1",
+        "Cache-Control": "max-age=0",
+        "Referer": "https://genius.com/",
+        "DNT": "1"
+    }
+    
+    try:
+        # Add a small delay to be polite
+        import time
+        time.sleep(1)
 
-        except Exception as e:
-            return f"Error: {str(e)}"
+        
+        response = requests.get(url, headers=headers, timeout=10)
+        response.raise_for_status()
+        
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        # STRICT selection - only the lyrics containers
+        lyrics_containers = soup.select('div[data-lyrics-container="true"]')
+        
+        if not lyrics_containers:
+            return "Error: No lyrics containers found"
+        
+        clean_lyrics = []
+        for container in lyrics_containers:
+            # Remove ALL non-lyric elements including spans, buttons, etc.
+            for element in container.find_all(['button', 'svg',]):
+                element.decompose()
+            
+            # Get text while preserving line breaks
+            container_text = container.get_text('\n', strip=True)
+            
+            # Only keep lines that look like actual lyrics
+            for line in container_text.split('\n'):
+                if line and not any(x in line for x in ['Contributors', 'Lyrics', 'Read More']):
+                    clean_lyrics.append(line)
+        
+        lyrics = '\n'.join(clean_lyrics)
+        lyrics = re.sub(r'\n{3,}', '\n\n', lyrics.strip())
+        
+        return lyrics
+
+    except Exception as e:
+        return f"Error: {str(e)}"
 
     
 def erase_before_bracket(text):
