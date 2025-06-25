@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
 from web import lyric as web
+from models.song import Song
 from fastapi.templating import Jinja2Templates
 
 
@@ -21,10 +22,11 @@ async def get_lyric(request: Request,
              song: str = Form(...)):
 
         lyric = web.get_one(artist, song)
+        url = Song(artist, song).url
 
         return templates.TemplateResponse(request=request, 
                                         name="result.html", 
-                                        context={'song': song, "artist" : artist, "lyric" : lyric})
+                                        context={'song': song, "artist" : artist, "lyric" : lyric, "url" : url})
 
 
 
