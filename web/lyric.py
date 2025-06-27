@@ -11,11 +11,3 @@ router = APIRouter(prefix = "/lyric")
 
 def get_one(artist: str, song: str):
     return service.get_one(artist, song)
-
-
-#router.post("", status_code=201)
-#router.post("/", status_code=201)
-
-#def create(explorer: Song):
-#    return service.create(explorer)
-    

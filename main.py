@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from web import lyric as web
 from models.song import Song
 from fastapi.templating import Jinja2Templates
@@ -7,6 +8,7 @@ from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
 templates = Jinja2Templates(directory="view/templates")
+app.mount("/static", StaticFiles(directory="view/static"), name="static")
 
 app.include_router(web.router)
 

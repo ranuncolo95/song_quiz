@@ -5,297 +5,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Song Quiz - Test Your Music Knowledge</title>
-    <style>
-        :root {
-            --primary: #4a148c;
-            --secondary: #7b1fa2;
-            --accent: #e91e63;
-            --light: #f5f5f5;
-            --dark: #212121;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .tagline {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 1.5rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.3);
-        }
-
-        .btn-secondary {
-            background-color: var(--secondary);
-        }
-
-        section {
-            padding: 4rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--primary);
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: white;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .feature-card h3 {
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-
-        .github-section {
-            background-color: white;
-        }
-
-        .repo-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .repo-link {
-            background: var(--light);
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--dark);
-            transition: all 0.3s ease;
-            border: 1px solid #eee;
-        }
-
-        .repo-link:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 2rem;
-        }
-
-        /* New Demo Section Styles */
-        .demo-section {
-            background-color: white;
-        }
-
-        .demo-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--light);
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: var(--primary);
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-
-        .results {
-            margin-top: 2rem;
-            padding: 1rem;
-            border-radius: 4px;
-            background-color: #f8f9fa;
-            border-left: 4px solid var(--accent);
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
     <header>
         <div class="container">
             <h1>Song Quiz</h1>
-            <p class="tagline">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, quis. Qui optio vel
-                odit quo ex. Eaque sequi tempore unde.</p>
-            <a href="https://github.com/ranuncolo95/song_quiz" class="btn">View on GitHub</a>
+            <p class="tagline">Discover lyrics for any song or your currently playing Spotify track</p>
         </div>
     </header>
 
-
-    <!-- New Demo Section -->
-    <section class="demo-section">
-        <div class="container">
-            <form action="/result" method="post">
-                <h2 class="section-title">Try It Out</h2>
-                <div class="demo-form">
-                    <div class="form-group">
-                        <label for="artist">Artist Name</label>
-                        <input type="text" id="artist" name="artist" placeholder="The Black Keys">
+    <main class="container">
+        <section class="services-section">
+            <h2 class="section-title">Get Song Lyrics</h2>
+            <div class="services-grid">
+                <!-- Manual Search Form -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <svg class="service-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                        </svg>
+                        <h3>Manual Search</h3>
                     </div>
-                    <div class="form-group">
-                        <label for="song">Song Title</label>
-                        <input type="text" id="song" name= "song" placeholder="Little Black Submarines">
-                    </div>
-                    <button id="submit-btn" class="btn btn-secondary">Get Lyric</button>
+                    <form action="/result" method="post" class="lyrics-form">
+                        <div class="form-group">
+                            <label for="artist">Artist Name</label>
+                            <input type="text" id="artist" name="artist" placeholder="The Beatles"
+                                value="{{ manual_artist if manual_artist else '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="song">Song Title</label>
+                            <input type="text" id="song" name="song" placeholder="Hey Jude"
+                                value="{{ manual_song if manual_song else '' }}">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Get Lyrics</button>
+                    </form>
+                </div>
 
-                    <div id="results" class="results">
-                        <h3>Results</h3>
-                        <div id="result-content"></div>
+                <!-- Spotify Integration -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <svg class="service-icon spotify-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
+                        </svg>
+                        <h3>Spotify Connect</h3>
                     </div>
-                </div>
-            </form>
-        </div>
-    </section>
-
-    <section>
-        <div class="container">
-            <h2 class="section-title">Features</h2>
-            <div class="features">
-                <div class="feature-card">
-                    <h3>Lorem, ipsum dolor.</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quibusdam magni repudiandae esse
-                        vero consequatur.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Lorem, ipsum dolor.</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident ipsum fugit soluta eos vero
-                        numquam?.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Lorem, ipsum dolor.</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cupiditate expedita iste, nesciunt esse
-                        fuga ducimus.</p>
+                    <div class="spotify-connect">
+                        <p>Get lyrics for your currently playing song on Spotify</p>
+                        <a href="/spotify-login" class="btn spotify-btn">
+                            <svg class="spotify-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
+                            </svg>
+                            Connect Spotify
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
+        <!-- Results Display -->
+        {% if from_manual or from_spotify %}
+        <section class="results-section">
+            <h2 class="section-title">Lyrics Results</h2>
+            <div class="lyrics-results">
+                {% if from_manual %}
+                <h3>{{ manual_song }} by {{ manual_artist }}</h3>
+                <pre>{{ manual_lyrics }}</pre>
+                {% endif %}
 
-    <section class="github-section">
-        <div class="container">
-            <h2 class="section-title">Project Structure</h2>
-            <div class="repo-links">
-                <a href="https://github.com/ranuncolo95/song_quiz" class="repo-link">Main Repository</a>
-                <a href="https://github.com/ranuncolo95/song_quiz/tree/main/web" class="repo-link">Web Interface</a>
-                <a href="https://github.com/ranuncolo95/song_quiz/tree/main/service" class="repo-link">Backend
-                    Service</a>
-                <a href="https://github.com/ranuncolo95/song_quiz/tree/main/models" class="repo-link">Data Models</a>
-                <a href="https://github.com/ranuncolo95/song_quiz/tree/main/data" class="repo-link">Data Interface</a>
+                {% if from_spotify %}
+                <h3>{{ spotify_song }} by {{ spotify_artist }}</h3>
+                <pre>{{ spotify_lyrics }}</pre>
+                {% endif %}
             </div>
-        </div>
-    </section>
+        </section>
+        {% endif %}
 
-    <section>
-        <div class="container">
-            <h2 class="section-title">How It Works</h2>
-            <div class="features">
-                <div class="feature-card">
-                    <h3>Lorem, ipsum dolor.</h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime, ullam.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Lorem, ipsum dolor.</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, vero?</p>
-                </div>
-                <div class="feature-card">
-                    <h3>Lorem, ipsum dolor.</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, maiores.</p>
-                </div>
-            </div>
+        {% if error %}
+        <div class="error-message">
+            <p>{{ error }}</p>
         </div>
-    </section>
+        {% endif %}
+    </main>
 
     <footer>
         <div class="container">
-            <p>Song Quiz Project &copy; 2025 | Created by ranuncolo95</p>
-            <p><a href="https://github.com/ranuncolo95/song_quiz" style="color: var(--accent);">Contribute on GitHub</a>
-            </p>
+            <p>Song Quiz Project &copy; 2025</p>
+            <p><a href="https://github.com/ranuncolo95/song_quiz" class="github-link">Contribute on GitHub</a></p>
         </div>
     </footer>
 </body>
