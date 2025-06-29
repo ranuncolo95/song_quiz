@@ -4,6 +4,15 @@ from bs4 import BeautifulSoup
 import re
 
 
+# --- Lyrics Fetching ---
+def get_lyrics(song: str, artist: str) -> str:
+    try:
+        response = requests.get(f"https://api.lyrics.ovh/v1/{artist}/{song}")
+        return response.json().get("lyrics", "Lyrics not found.")
+    except:
+        return "Could not fetch lyrics."
+
+
 def create_genius_url(artist: str, song: str) -> str:
     """
     Creates a Genius.com lyrics URL from artist and song names
