@@ -2,4 +2,4 @@
 /__pycache__
 .cache
 data/.env
-
+data/utils
