@@ -25,8 +25,8 @@ async def get_lyric(request: Request,
         url = Song(artist, song).url
 
         return templates.TemplateResponse(request=request, 
-                                        name="result.html", 
-                                        context={'song': song, "artist" : artist, "lyric" : lyric, "url" : url})
+        name="result.html", 
+        context={'song': song, "artist" : artist, "lyric" : lyric, "url" : url})
 
 
 # --- Spotify Routes ---
@@ -44,8 +44,8 @@ async def current_song(request: Request, access_token: str = Query(...)):
     r = web_spotify.current_song(access_token)
 
     return templates.TemplateResponse(request=request, 
-                                        name="result.html", 
-                                        context={'song': r["song"], "artist" : r["artist"], "lyrics" : r["lyrics"], "url" : "Spotify current song"})
+    name="result.html", 
+    context={'song': r["song"], "artist" : r["artist"], "lyrics" : r["lyrics"], "url" : "Spotify current song"})
 
 
 if __name__ == "__main__":
