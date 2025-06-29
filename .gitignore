@@ -6,3 +6,4 @@ data/utils
 data/__pycache__
 service/__pycache__
 web/__pycache__
+models/__pycache__
