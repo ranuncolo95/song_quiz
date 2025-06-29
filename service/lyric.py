@@ -1,4 +1,3 @@
-from models.song import Song
 from data import lyric as data
 
 

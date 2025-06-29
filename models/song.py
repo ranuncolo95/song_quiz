@@ -1,3 +1,5 @@
+from pydantic import BaseModel
+from typing import Optional
 from .defs import *
 
 class Song():
@@ -15,3 +17,9 @@ class Song():
     lyrics = merge_comma_lines(lyrics)
 
     self.lyrics = lyrics
+
+  # Model for the current song
+class CurrentSong(BaseModel):
+    song: str
+    artist: str
+    lyrics: Optional[str] = None

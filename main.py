@@ -2,20 +2,18 @@ from fastapi import FastAPI, Request, HTTPException, Depends, Query, Form
 from fastapi.responses import RedirectResponse, HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from spotipy.oauth2 import SpotifyOAuth
-from pydantic import BaseModel
-from typing import Optional
 import requests
 import spotipy
-import os
-from web import lyric as web
+from web import lyric as web_lyric
+from web import spotify as web_spotify
 from models.song import Song
+from data.config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI
+from spotipy.oauth2 import SpotifyOAuth
+
 
 app = FastAPI()
 templates = Jinja2Templates(directory="view/templates")
 app.mount("/static", StaticFiles(directory="view/static"), name="static")
-
-app.include_router(web.router)
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -28,43 +26,26 @@ async def get_lyric(request: Request,
              artist: str = Form(...), 
              song: str = Form(...)):
 
-        lyric = web.get_one(artist, song)
+        lyric = web_lyric.get_one(artist, song)
         url = Song(artist, song).url
 
         return templates.TemplateResponse(request=request, 
                                         name="result.html", 
                                         context={'song': song, "artist" : artist, "lyric" : lyric, "url" : url})
-
-
-from dotenv import load_dotenv
-load_dotenv()  # Load environment variables from .env
-
-
-# Load Spotify credentials from .env
-SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
-SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
-SPOTIFY_REDIRECT_URI = "https://129d-151-59-7-64.ngrok-free.app/callback"  # Must match Spotify Dashboard
-
-# Spotipy OAuth setup
-sp_oauth = SpotifyOAuth(
-    client_id=SPOTIFY_CLIENT_ID,
-    client_secret=SPOTIFY_CLIENT_SECRET,
-    redirect_uri=SPOTIFY_REDIRECT_URI,
-    scope="user-read-currently-playing",
-)
-
-# Model for the current song
-class CurrentSong(BaseModel):
-    song: str
-    artist: str
-    lyrics: Optional[str] = None
-
 # --- Routes ---
 
 @app.get("/spotify-login")
 async def spotify_login():
-    auth_url = sp_oauth.get_authorize_url()
-    return RedirectResponse(auth_url)
+    return web_spotify.spotify_login()
+
+# Spotipy OAuth setup
+sp_oauth = SpotifyOAuth(
+client_id=SPOTIFY_CLIENT_ID,
+client_secret=SPOTIFY_CLIENT_SECRET,
+redirect_uri=SPOTIFY_REDIRECT_URI,
+scope="user-read-currently-playing",
+)
+
 
 @app.get("/callback")
 async def callback(code: str):
