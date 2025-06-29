@@ -26,7 +26,7 @@ async def get_lyric(request: Request,
 
         return templates.TemplateResponse(request=request, 
         name="result.html", 
-        context={'song': song, "artist" : artist, "lyric" : lyric, "url" : url})
+        context={'song': song, "artist" : artist, "lyrics" : lyric, "url" : url})
 
 
 # --- Spotify Routes ---
