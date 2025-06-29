@@ -45,7 +45,7 @@ async def current_song(request: Request, access_token: str = Query(...)):
 
     return templates.TemplateResponse(request=request, 
                                         name="result.html", 
-                                        context={'song': r["song"], "artist" : r["artist"], "lyric" : r["lyrics"], "url" : "Spotify current song"})
+                                        context={'song': r["song"], "artist" : r["artist"], "lyrics" : r["lyrics"], "url" : "Spotify current song"})
 
 
 if __name__ == "__main__":
