@@ -1,6 +1,9 @@
 import os
 from dotenv import load_dotenv
-load_dotenv()  # Load environment variables from .env
+
+
+dotenv_path = os.path.join(os.path.dirname(__file__), 'utils', '.env')
+load_dotenv(dotenv_path)  # Load environment variables from .env
 
 
 # Load Spotify credentials from .env
