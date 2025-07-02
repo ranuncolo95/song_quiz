@@ -6,6 +6,9 @@ from web import lyric as web_lyric
 from web import spotify as web_spotify
 from models.song import Song
 
+
+# API ENDPOINTS
+
 app = FastAPI()
 templates = Jinja2Templates(directory="view/templates")
 app.mount("/static", StaticFiles(directory="view/static"), name="static")
