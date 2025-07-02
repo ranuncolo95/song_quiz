@@ -3,7 +3,7 @@ from fastapi.responses import RedirectResponse
 from data.config import SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REDIRECT_URI
 from fastapi import Query
 import spotipy
-from models.defs import get_lyrics
+from .lyric import get_one
 
 # Spotipy OAuth setup
 sp_oauth = SpotifyOAuth(
@@ -41,7 +41,7 @@ def current_song(access_token: str = Query(...)):
     
     song_name = current_track["item"]["name"]
     artist = current_track["item"]["artists"][0]["name"]
-    lyrics = get_lyrics(song_name, artist)
+    lyrics = get_one(artist, song_name)
     
     return {
             "song": song_name,
