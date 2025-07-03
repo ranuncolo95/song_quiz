@@ -1,9 +1,5 @@
 # Lyrics Retrieval API 🎵
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-005571?logo=fastapi)](https://fastapi.tiangolo.com/)
-
 A robust API service that retrieves song lyrics by artist and title. Built with FastAPI, this service scrapes and processes lyrics from Genius.com, providing clean, formatted text output.
 
 ## Features ✨
@@ -13,7 +9,6 @@ A robust API service that retrieves song lyrics by artist and title. Built with 
 - 🌐 Genius.com integration
 - ⚡ FastAPI performance
 - 🛡️ Error handling for missing lyrics
-- 📦 Ready for deployment
 
 ## Future Game Integration 🎮
 *Planned features for the interactive lyrics game:*
@@ -39,37 +34,45 @@ A robust API service that retrieves song lyrics by artist and title. Built with 
 
 ### Prerequisites
 - Python 3.8+
-- Poetry (recommended) or pip
+- Spotify Developer account
+- Ngrok account (auth token in .env)
 
 ### Setup
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/ranuncolo95/lyrics_api.git
-   cd lyrics_api
+   git clone https://github.com/ranuncolo95/song_quiz.git
+   cd song_quiz
 
 2. Install dependencies:
 
    ```bash
     pip install -r requirements.txt
+
+3. Setup the evironment variables.
+
+   ```bash
+
+      #.env file in data/utils/.env
+
+      SPOTIFY_CLIENT_ID='your_spotify_client_id'
+      SPOTIFY_CLIENT_SECRET='your_spotify_client_secret'
+      #this will be modified in automatic
+      SPOTIFY_REDIRECT_URI=""
+      NGROK_AUTHTOKEN='ngrok_auth_token'
   
-3. Run the development server:
+4. Run the ngrok script:
 
    ```bash
-    poetry run uvicorn main:app --reload
-##API Endpoints 📡
-###Get Lyrics
+    py ngrok_start.py
 
-text
+5. Get the link in Spotify Dashboard
 
-Get Lyrics
+Copy the Active Public URL given by the script in the Spotify Dev Dashboard in the Redirect URI, with /callback at the end.
+
+6. Run the main script
+
    ```bash
-      curl "http://localhost:8000/lyric?artist=Coldplay&song=Yellow"
-```
+      py main.py
 
-Successful Response:
-
-
-
-
-
+6. Visit the local url given by FastAPI and enjoy the lyrics!
